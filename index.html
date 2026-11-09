@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GameJam - Encuentra tu Squad Sin Tóxicos</title>
+    <!-- Enlace a tu archivo de estilos CSS -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- Barra Superior -->
+    <header>
+        <div class="brand">
+            ⚡ GAMEJAM <span>| Prototipo Web MVP</span>
+        </div>
+        <div class="user-pill">
+            <span>👤 CarlosGamer</span> • <span class="honor-stars">★ 4.9 Honor</span>
+        </div>
+    </header>
+
+    <!-- Layout Principal -->
+    <div class="app-layout">
+
+        <!-- Barra Lateral de Filtros -->
+        <aside>
+            <h3>Filtros de Búsqueda</h3>
+
+            <div class="filter-group">
+                <label for="gameFilter">Videojuego</label>
+                <select id="gameFilter">
+                    <option value="todos">Todos los juegos</option>
+                    <option value="Valorant">Valorant (Latam Sur)</option>
+                    <option value="LoL">League of Legends</option>
+                    <option value="Dota">Dota 2 (Perú)</option>
+                    <option value="Minecraft">Minecraft Java</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="rankFilter">Rango de Habilidad</label>
+                <select id="rankFilter">
+                    <option>Todos los rangos</option>
+                    <option>Hierro / Bronce</option>
+                    <option>Plata / Oro</option>
+                    <option>Platino o Superior</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="voiceFilter">Preferencia de Voz</label>
+                <select id="voiceFilter">
+                    <option>🎤 Micrófono Obligatorio</option>
+                    <option>💬 Solo Chat / Pings</option>
+                </select>
+            </div>
+
+            <!-- Tarjeta Freemium Jam Pass -->
+            <div class="jam-pass-card">
+                <h4>👑 Jam Pass VIP</h4>
+                <p>Filtra solo jugadores con 4.8 a 5.0 estrellas de reputación. Cero insultos y cero trolls garantizado.
+                </p>
+                <button id="btnOpenJamPass" class="btn-jampass">Activar por S/ 7.90/mes</button>
+            </div>
+        </aside>
+
+        <!-- Muro de Salas en Vivo -->
+        <main>
+            <div class="top-actions">
+                <h2>Salas en Tiempo Real</h2>
+                <button id="btnCreateRoom" class="btn-create">+ Crear Mi Sala</button>
+            </div>
+
+            <div id="roomContainer">
+                <!-- Sala 1 -->
+                <div class="room-card" data-game="Valorant">
+                    <div>
+                        <div class="room-title">Subir a Oro sin Trolls - Comunicación limpia</div>
+                        <div class="room-tags">
+                            <span class="tag-badge">VALORANT</span>
+                            <span>Líder: <b>ViperGod#LAS</b> (<span class="honor-stars">★ 4.9</span>)</span>
+                            <span>• Rango: Plata III</span>
+                            <span>• 🎤 Micro Obligatorio</span>
+                        </div>
+                    </div>
+                    <button class="btn-join" data-id="ViperGod#LAS" data-game="Valorant">Unirme y Copiar ID</button>
+                </div>
+
+                <!-- Sala 2 -->
+                <div class="room-card" data-game="LoL">
+                    <div>
+                        <div class="room-title">Ranked Chill de Noche - Sin flameos</div>
+                        <div class="room-tags">
+                            <span class="tag-badge">LEAGUE OF LEGENDS</span>
+                            <span>Líder: <b>YasuoReformed#LAN</b> (<span class="honor-stars">★ 4.8</span>)</span>
+                            <span>• Rango: Oro IV</span>
+                            <span>• 🎤 Micro Opcional</span>
+                        </div>
+                    </div>
+                    <button class="btn-join" data-id="YasuoReformed#LAN" data-game="LoL">Unirme y Copiar ID</button>
+                </div>
+
+                <!-- Sala 3 -->
+                <div class="room-card" data-game="Dota">
+                    <div>
+                        <div class="room-title">Dota 2 Ranked - Falta Pos 4 o 5</div>
+                        <div class="room-tags">
+                            <span class="tag-badge">DOTA 2</span>
+                            <span>Líder: <b>InkaWarrior#PE</b> (<span class="honor-stars">★ 5.0</span>)</span>
+                            <span>• Rango: Cruzado</span>
+                            <span>• 🎤 Micro Obligatorio</span>
+                        </div>
+                    </div>
+                    <button class="btn-join" data-id="InkaWarrior#PE" data-game="Dota 2">Unirme y Copiar ID</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal 1: ID Copiado y Calificación de Honor -->
+    <div id="joinModal" class="modal-overlay">
+        <div class="modal-box">
+            <h2 class="title-green">¡Te has unido al Squad!</h2>
+            <p>El ID del líder fue copiado automáticamente a tu portapapeles. Pégalo con <b>Ctrl + V</b> en tu juego.
+            </p>
+            <div id="roomClipId" class="code-pill">ID_AQUI</div>
+
+            <hr class="separator" />
+
+            <h3>Simulación: Calificación Post-Partida</h3>
+            <p>Evalúa la conducta y el respeto de tu líder de equipo:</p>
+            <div class="stars-interactive">★★★★★</div>
+
+            <button id="btnSaveHonor" class="btn-modal-action">Guardar Calificación de Honor</button>
+            <button id="btnCloseJoin" class="btn-modal-cancel">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Modal 2: Pasarela Freemium (Jam Pass) -->
+    <div id="jampassModal" class="modal-overlay">
+        <div class="modal-box">
+            <h2 class="title-red">Suscripción Jam Pass VIP</h2>
+            <p>Disfruta de la mejor experiencia competitiva con beneficios exclusivos diseñados para gamers serios.</p>
+
+            <div class="perks-box">
+                <p>✅ Filtro estricto: Solo jugadores con <b>4.8 a 5.0 estrellas</b>.</p>
+                <p>✅ Salas y búsquedas <b>ilimitadas</b> cada día.</p>
+                <p>✅ Insignia dorada de <b>Gamer Verificado</b> en tu perfil.</p>
+            </div>
+
+            <div class="price-tag">S/ 7.90 / mes</div>
+
+            <button id="btnPayYape" class="btn-modal-action btn-pay">Simular Pago con Yape / Plin</button>
+            <button id="btnCloseJamPass" class="btn-modal-cancel">Volver</button>
+        </div>
+    </div>
+
+    <!-- Enlace a tu archivo de lógica JavaScript -->
+    <script src="script.js"></script>
+</body>
+
+</html>
